@@ -8,7 +8,7 @@
 Summary:	Google Plugin for Eclipse
 Name:		eclipse-plugin-google
 Version:	%{pluginver}
-Release:	0.4
+Release:	0.7
 License:	Apache License, v2.0
 Group:		Development/Tools
 URL:		http://code.google.com/eclipse/
@@ -29,6 +29,9 @@ BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		eclipsedir	%{_datadir}/eclipse
+
+# somewhy rpm-4.5 searches for ELF provides even the .so files are not executable
+%define		_noautoprovfiles	%{_datadir}/eclipse
 
 %description
 The Google Plugin for Eclipse is the fastest way to start developing
@@ -61,6 +64,9 @@ Google Web Toolkit SDK Bundle for Eclipse.
 
 %prep
 %setup -qc
+install -d appengine gwt
+%{__unzip} -d appengine -qq %{SOURCE2}
+%{__unzip} -d gwt -qq %{SOURCE4}
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -70,10 +76,10 @@ cp -a plugins/* $RPM_BUILD_ROOT%{eclipsedir}/plugins
 
 # appengine sdkbundle
 cp -a %{SOURCE1} $RPM_BUILD_ROOT%{eclipsedir}/features
-cp -a %{SOURCE2} $RPM_BUILD_ROOT%{eclipsedir}/plugins
+cp -a appengine $RPM_BUILD_ROOT%{eclipsedir}/plugins/$(basename %{SOURCE2} .jar)
 # gwt sdkbundle
 cp -a %{SOURCE3} $RPM_BUILD_ROOT%{eclipsedir}/features
-cp -a %{SOURCE4} $RPM_BUILD_ROOT%{eclipsedir}/plugins
+cp -a gwt $RPM_BUILD_ROOT%{eclipsedir}/plugins/$(basename %{SOURCE4} .jar)
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -89,10 +95,10 @@ rm -rf $RPM_BUILD_ROOT
 %files appengine
 %defattr(644,root,root,755)
 %{eclipsedir}/features/com.google.appengine.eclipse.sdkbundle.e33.feature_*.jar
-%{eclipsedir}/plugins/com.google.appengine.eclipse.sdkbundle_*.jar
+%{eclipsedir}/plugins/com.google.appengine.eclipse.sdkbundle_*
 
 %files gwt
 %defattr(644,root,root,755)
 %{eclipsedir}/features/com.google.gwt.eclipse.sdkbundle.e33.feature_*.jar
 # XXX: ix86 mozilla inside
-%{eclipsedir}/plugins/com.google.gwt.eclipse.sdkbundle.linux_*.jar
+%{eclipsedir}/plugins/com.google.gwt.eclipse.sdkbundle.linux_*
