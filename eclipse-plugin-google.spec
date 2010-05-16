@@ -24,6 +24,7 @@ Source3:	http://dl.google.com/eclipse/plugin/3.3/features/com.google.gwt.eclipse
 Source4:	http://dl.google.com/eclipse/plugin/3.3/plugins/com.google.gwt.eclipse.sdkbundle.linux_%{gwtver}.v200904062254.jar
 # Source4-md5:	9fe86bcde62ab891569b96fdb6fc0752
 BuildRequires:	rpm-javaprov
+BuildRequires:	unzip
 Requires:	eclipse >= 3.3
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
