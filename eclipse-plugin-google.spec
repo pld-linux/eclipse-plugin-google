@@ -1,6 +1,7 @@
 # TODO:
 # - com.google.appengine.eclipse.sdkbundle_1.2.1.v200905131156/
 # - com.google.gwt.eclipse.sdkbundle.linux_1.6.4.v200904062254 is x86 centric (build from source?)
+# - http://code.google.com/webtoolkit/makinggwtbetter.html#compiling
 %define		pluginver	1.0.1
 %define		appengver	1.2.1
 %define		gwtver		1.6.4
@@ -58,6 +59,7 @@ Google App Engine for Java SDK Bundle for Eclipse.
 Summary:	Google Web Toolkit SDK Bundle for Eclipse
 Version:	%{gwtver}
 Group:		Development/Tools
+URL:		http://code.google.com/webtoolkit/
 Requires:	%{name} = %{pluginver}-%{release}
 
 %description gwt
