@@ -5,7 +5,6 @@
 %define		pluginver	1.0.1
 %define		appengver	1.2.1
 %define		gwtver		1.6.4
-%include	/usr/lib/rpm/macros.java
 Summary:	Google Plugin for Eclipse
 Name:		eclipse-plugin-google
 Version:	%{pluginver}
